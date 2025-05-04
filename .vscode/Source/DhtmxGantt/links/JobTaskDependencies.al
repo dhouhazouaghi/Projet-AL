@@ -22,6 +22,7 @@ page 50714 "Job Task Dependencies"
                 {
                     ApplicationArea = All;
                     ToolTip = 'Type de dépendance avec la tâche prédécesseur.';
+                    ShowCaption = true; 
                 }
             }
         }

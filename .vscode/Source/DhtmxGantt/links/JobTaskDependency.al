@@ -23,11 +23,9 @@ table 50706 "Job Task Dependency"
             TableRelation = "Job Task"."Job Task No." where("Job No." = field("Job No."));
             DataClassification = ToBeClassified;
         }
-        field(4; "Dependency Type"; Option)
+    field(4; "Dependency Type"; Enum "Job Task Dependency Type")
         {
             Caption = 'Dependency Type';
-            OptionMembers = "Finish-to-Start", "Start-to-Start", "Finish-to-Finish", "Start-to-Finish";
-            OptionCaption = 'Finish-to-Start,Start-to-Start,Finish-to-Finish,Start-to-Finish';
             DataClassification = ToBeClassified;
         }
         field(5; "Line No."; Integer)

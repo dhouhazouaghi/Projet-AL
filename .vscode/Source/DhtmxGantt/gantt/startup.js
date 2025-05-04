@@ -59,7 +59,9 @@ gantt.config.update_rendered = true;
 gantt.config.smart_rendering = false;
 gantt.config.order_branch = true;
 gantt.config.order_branch_free = true;
-
+//links
+gantt.config.show_links = true;
+gantt.config.link_attribute = "type";
 // == Mise à jour automatique des tâches parentes ==
 function updateParent(taskId) {
     const task = gantt.getTask(taskId);
