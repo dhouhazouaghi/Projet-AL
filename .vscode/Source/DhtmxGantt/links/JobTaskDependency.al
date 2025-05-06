@@ -46,44 +46,5 @@ table 50706 "Job Task Dependency"
         key(Secondary; "Job No.", "Predecessor Job Task No.") { }
     }
 
-    // trigger OnInsert()
-    // begin
-    //     ValidateDependency();
-    // end;
-
-    // trigger OnModify()
-    // begin
-    //     ValidateDependency();
-    // end;
-
-    // local procedure ValidateDependency()
-    // var
-    //     DependencyChain: List of [Code[20]];
-    // begin
-    //     if "Predecessor Job Task No." = "Job Task No." then
-    //         Error('Une tâche ne peut pas dépendre d’elle-même. Tâche : %1', "Job Task No.");
-
-    //     DependencyChain.Add("Job Task No.");
-    //     CheckForCircularDependency("Predecessor Job Task No.", DependencyChain);
-    // end;
-
-    // local procedure CheckForCircularDependency(TaskNo: Code[20]; Chain: List of [Code[20]])
-    // var
-    //     DepRec: Record "Job Task Dependency";
-    //     NextTask: Code[20];
-    // begin
-    //     if Chain.Contains(TaskNo) then
-    //         Error('Dépendance circulaire détectée à partir de la tâche %1.', TaskNo);
-
-    //     Chain.Add(TaskNo);
-
-    //     DepRec.SetRange("Job No.", "Job No.");
-    //     DepRec.SetRange("Job Task No.", TaskNo);
-
-    //     if DepRec.FindSet() then
-    //         repeat
-    //             NextTask := DepRec."Predecessor Job Task No.";
-    //             CheckForCircularDependency(NextTask, Chain);
-    //         until DepRec.Next() = 0;
-    // end;
+    
 }

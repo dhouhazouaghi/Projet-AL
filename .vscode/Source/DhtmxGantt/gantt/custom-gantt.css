@@ -18,3 +18,11 @@
 .gantt_task_cell.weekend {
     background-color: #fce4e4;
 }
+
+/* 
+.milestone-task .gantt_task_content {
+    background: #FF5733;
+    shape-rendering: crispEdges;
+} */
+
+

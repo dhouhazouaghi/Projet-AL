@@ -14,6 +14,13 @@ gantt.config.columns = [
         }
     }
 ];
+gantt.templates.rightside_text = function (start, end, task) {
+    if (task.type == gantt.config.types.milestone) {
+        return "<span class='milestone-text'>" + task.text + "</span>";
+    }
+    return "";
+};
+
 
 // == Création du conteneur principal ==
 const container = document.getElementById("controlAddIn");
@@ -46,6 +53,7 @@ style.innerHTML = `
         font-family: 'Segoe UI', sans-serif;
         font-size: 14px;
     }
+}
 `;
 document.head.appendChild(style);
 
@@ -59,7 +67,6 @@ gantt.config.update_rendered = true;
 gantt.config.smart_rendering = false;
 gantt.config.order_branch = true;
 gantt.config.order_branch_free = true;
-//links
 gantt.config.show_links = true;
 gantt.config.link_attribute = "type";
 // == Mise à jour automatique des tâches parentes ==
