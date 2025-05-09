@@ -12,7 +12,9 @@ gantt.config.columns = [
         }
     }
 ];
-
+gantt.config.drag_move = true;
+gantt.config.drag_links = true;
+gantt.config.enable_inline_editing = true;
 // == Custom milestone rendering ==
 gantt.templates.task_class = function(start, end, task) {
     if (task.type === "milestone") {
@@ -40,14 +42,8 @@ gantt.templates.task_cell_class = function(item, date) {
 // == Styles personnalisés ==
 const style = document.createElement('style');
 style.innerHTML = `
-    .gantt_task_row {
-        background-color: #f0f0f0;
-    }
-    .gantt_task_content {
-        background-color: rgb(76, 162, 175);
-        border-radius: 5px;
-        color: white;
-    }
+  
+   
     .gantt_grid_data {
         font-family: 'Segoe UI', sans-serif;
         font-size: 14px;
@@ -85,12 +81,12 @@ style.innerHTML = `
     }
 `;
 document.head.appendChild(style);
-gantt.templates.rightside_text = function (start, end, task) {
-		if (task.type == gantt.config.types.milestone) {
-			return task.text;
-		}
-		return "";
-	};
+// gantt.templates.rightside_text = function (start, end, task) {
+// 		if (task.type == gantt.config.types.milestone) {
+// 			return task.text;
+// 		}
+// 		return "";
+// 	};
 // == Zoom Control ==
 initZoomControl(gantt);
 
@@ -118,11 +114,14 @@ gantt.attachEvent("onAfterTaskUpdate", function(id) {
 gantt.attachEvent("onAfterTaskAdd", function(id, task) {
     updateParent(id);
 });
-gantt.attachEvent("onAfterTaskDelete", function(id, task) {
-    if (task && task.parent) {
-        gantt.updateTask(task.parent);
-    }
+// Événement : Suppression d'une tâche
+gantt.attachEvent("onAfterTaskDelete", function(id) {
+    Microsoft.Dynamics.NAV.InvokeExtensibilityMethod("OnTaskDelete", [id.toString()]);
 });
+
+
+
+
 
 // == Initialisation ==
 gantt.init("gantt_here");

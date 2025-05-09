@@ -1,6 +1,6 @@
-controladdin gantt
+controladdin GanttControlAddIn
 {
-    Scripts = 'gantt/dhtmlxgantt.js', 
+    Scripts = 'gantt/dhtmlxgantt.js',
               'gantt/gantt.js',
               'gantt/Zoom.js',
               'gantt/Export.js';
@@ -14,7 +14,12 @@ controladdin gantt
     procedure Load(Data: JsonObject);
     procedure ZoomIn();
     procedure ZoomOut();
-    procedure RefreshGantt(Data: JsonObject);
+    // procedure Refresh(data: JsonObject)
     procedure ExportToPDF()
     procedure ExportToPNG()
+
+    event OnTaskCreate(taskJson: Text);
+    event OnTaskUpdate(taskJson: Text);
+    event OnTaskDelete(taskId: Text);
+    procedure ExecuteJavaScript(script: Text);
 }
