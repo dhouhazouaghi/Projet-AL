@@ -79,37 +79,29 @@
 
         gantt.ext.zoom.init(zoomConfig);
         gantt.ext.zoom.setLevel("week");
-
-        // Créer un conteneur pour les boutons au-dessus du diagramme
-        const container = document.getElementById("controlAddIn");
-        const controls = document.createElement("div");
-        controls.style.marginBottom = "10px"; // Marges pour espacer du diagramme
-        controls.style.textAlign = "center"; // Centrer les boutons
-
-        // Ajouter uniquement les boutons Zoom In et Zoom Out
-        controls.innerHTML = `
-    <style>
-        .gantt-zoom-btn {
-            background-color: #4caf50;
-            color: white;
-            border: none;
-            padding: 10px 20px;
-            margin: 5px;
-            font-size: 14px;
-            border-radius: 5px;
-            cursor: pointer;
-            transition: background-color 0.3s ease;
+        
+        // Expose zoom methods to be called from AL
+        Microsoft.Dynamics.NAV.InvokeExtensibilityMethod("ControlAddInReady", []);
+    };
+    
+    // Method to be called from AL trigger for Zoom In
+    window.ZoomIn = function() {
+        if (window.ganttInstance) {
+            window.ganttInstance.ext.zoom.zoomIn();
         }
-
-        .gantt-zoom-btn:hover {
-            background-color: #45a049;
+    };
+    
+    // Method to be called from AL trigger for Zoom Out
+    window.ZoomOut = function() {
+        if (window.ganttInstance) {
+            window.ganttInstance.ext.zoom.zoomOut();
         }
-    </style>
-    <input type="button" value="Zoom avant" class="gantt-zoom-btn" onclick="gantt.ext.zoom.zoomIn();" />
-    <input type="button" value="Zoom arrière" class="gantt-zoom-btn" onclick="gantt.ext.zoom.zoomOut();" />
-`;
-
-        container.prepend(controls);  // Utiliser prepend pour les placer au-dessus du diagramme
-
+    };
+    
+    // Store gantt instance when initialized
+    const originalInitZoomControl = window.initZoomControl;
+    window.initZoomControl = function(gantt) {
+        window.ganttInstance = gantt;
+        originalInitZoomControl(gantt);
     };
 })();

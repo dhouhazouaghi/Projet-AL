@@ -10,16 +10,22 @@ controladdin GanttControlAddIn
     VerticalStretch = true;
     HorizontalStretch = true;
 
+    // Events
     event ControlReady();
+    event OnTaskUpdate(TaskData: JsonObject);
+    event OnTaskDelete(taskId: Text);
+    event OnTaskCreate(taskData: JsonObject);
+    event OnLinkDelete(linkData: JsonObject);
+    event OnLinkCreate(linkData: JsonObject);
+    event OnAddProject();
+
+    // Procedures
     procedure Load(Data: JsonObject);
+    procedure LoadResources(Data: JsonObject);
     procedure ZoomIn();
     procedure ZoomOut();
-    // procedure Refresh(data: JsonObject)
-    procedure ExportToPDF()
-    procedure ExportToPNG()
-
-    event OnTaskCreate(taskJson: Text);
-    event OnTaskUpdate(taskJson: Text);
-    event OnTaskDelete(taskId: Text);
-    procedure ExecuteJavaScript(script: Text);
+    procedure Refresh(Data: JsonObject);
+    procedure ExportGanttToPDF();
+    
+    procedure ExportToPNG();
 }
